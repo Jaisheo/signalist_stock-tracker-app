@@ -77,7 +77,7 @@ const SignUp = () => {
                 />
 
                 <SelectField
-                   name="Investment Goals"
+                   name="investmentGoals"
                    label="Investment Goals"
                    placeholder="Select your investment goal"
                    options={INVESTMENT_GOALS}
