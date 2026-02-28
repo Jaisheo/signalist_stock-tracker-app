@@ -13,13 +13,16 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {useRouter} from "next/navigation";
 import NavItems from "@/components/NavItems";
+// import {signOut} from "better-auth/api";
+import {signOut} from "@/lib/actions/auth.actions";
 
-const UserDropdown = () => {
+const UserDropdown = ({user}:{user:User}) => {
     const router=useRouter();
     const handleSignOut=async()=>{
+        await signOut();
         router.push("/sign-in");
     }
-    const user={name:'Shivam',email:'shivam@js.com'};
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
