@@ -48,7 +48,8 @@ const response=await step.ai.infer('generate-welcome-intro',{
 );
 
 export const sendDailyNewsSummary=inngest.createFunction(
-    { id: "daily-new-summary" },
+export const sendDailyNewsSummary=inngest.createFunction(
+    { id: "daily-news-summary" },
     [{event:'app/send.daily.news'},{cron:'0 12 * * *'}],
     // [{event:'app/send.daily.news'},{cron:'* * * * *'}],
     async({step})=>{
