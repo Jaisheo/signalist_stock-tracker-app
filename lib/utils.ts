@@ -35,20 +35,33 @@ export function formatMarketCapValue(marketCapUsd: number): string {
   return `$${marketCapUsd.toFixed(2)}`; // Below one million, show full USD amount
 }
 
+const formatUTCDate = (date: Date): string => {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const getCurrentUTCMidnight = (): Date => {
+  const now = new Date();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+};
+
 export const getDateRange = (days: number) => {
-  const toDate = new Date();
-  const fromDate = new Date();
-  fromDate.setDate(toDate.getDate() - days);
+  const toDate = getCurrentUTCMidnight();
+  const fromDate = new Date(toDate);
+  fromDate.setUTCDate(fromDate.getUTCDate() - days);
+
   return {
-    to: toDate.toISOString().split('T')[0],
-    from: fromDate.toISOString().split('T')[0],
+    to: formatUTCDate(toDate),
+    from: formatUTCDate(fromDate),
   };
 };
 
 // Get today's date range (from today to today)
 export const getTodayDateRange = () => {
-  const today = new Date();
-  const todayString = today.toISOString().split('T')[0];
+  const today = getCurrentUTCMidnight();
+  const todayString = formatUTCDate(today);
   return {
     to: todayString,
     from: todayString,
