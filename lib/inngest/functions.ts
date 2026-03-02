@@ -114,7 +114,7 @@ export const sendDailyNewsSummary=inngest.createFunction(
         }
         //Step #4: Send emails
         await step.run('send-news-emails', async () => {
-            await Promise.all(
+            await Promise.allSettled(
                 // Promise.allSettled() chatGpt suggested as can handle some edge case error but for now leave it
                 userNewsSummaries.map(async ({ user, newsContent}) => {
                     if(!newsContent) return false;
