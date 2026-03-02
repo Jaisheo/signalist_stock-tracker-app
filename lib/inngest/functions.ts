@@ -74,7 +74,10 @@ export const sendDailyNewsSummary=inngest.createFunction(
 
                     perUser.push({ user, articles });
                 } catch (e) {
-                    console.error('daily-news: error preparing user news', user.email, e);
+                    console.error('daily-news: error preparing user news', {
+                        userId: user.id ?? 'unknown-user',
+                        error: e,
+                    });
                     perUser.push({ user, articles: [] });
                 }
             }
@@ -109,7 +112,10 @@ export const sendDailyNewsSummary=inngest.createFunction(
 
                 userNewsSummaries.push({ user, newsContent });
             } catch (e) {
-                console.error('Failed to summarize news for:', user.email);
+                console.error('daily-news: failed to summarize news', {
+                    userId: user.id ?? 'unknown-user',
+                    error: e,
+                });
                 userNewsSummaries.push({ user, newsContent: null });
             }
         }
