@@ -28,3 +28,49 @@ const useTradingViewWidget = (scriptUrl:string,config:Record<string, unknown>,he
     return containerRef;
 }
 export default useTradingViewWidget
+
+// 'use client';
+// import { useEffect, useRef } from 'react';
+//
+// const useTradingViewWidget = (
+//     scriptUrl: string,
+//     config: Record<string, unknown>,
+//     height = 600
+// ) => {
+//     const containerRef = useRef<HTMLDivElement | null>(null);
+//
+//     useEffect(() => {
+//         if (!containerRef.current) return;
+//
+//         containerRef.current.innerHTML = '';
+//
+//         const widgetDiv = document.createElement("div");
+//         widgetDiv.className = "tradingview-widget-container__widget";
+//         widgetDiv.style.width = "100%";
+//         widgetDiv.style.height = `${height}px`;
+//
+//         containerRef.current.appendChild(widgetDiv);
+//
+//         const script = document.createElement("script");
+//         script.src = scriptUrl;
+//         script.async = true;
+//         script.type = "text/javascript";
+//         script.innerHTML = JSON.stringify({
+//             ...config,
+//             width: "100%",   // 🔥 force responsive
+//             height,
+//         });
+//
+//         containerRef.current.appendChild(script);
+//
+//         return () => {
+//             if (containerRef.current) {
+//                 containerRef.current.innerHTML = '';
+//             }
+//         };
+//     }, [scriptUrl, config, height]);
+//
+//     return containerRef;
+// };
+//
+// export default useTradingViewWidget;
